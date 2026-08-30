@@ -1,0 +1,8 @@
+{
+  "name": "velora-hello-website",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A plain, zero-dependency website on Velora's headless API",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

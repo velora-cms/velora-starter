@@ -25,16 +25,20 @@ rotated whenever we feel like it.
 
 ## Run the example site
 
-[`examples/blog-astro`](examples/blog-astro) is an Astro blog that reads
-its posts from a Velora instance's headless API at request time — point
-it at the hosted demo and it renders live demo content:
+[`examples/hello-website`](examples/hello-website) is a normal website
+on Velora's headless API — one plain Node file, no framework, no npm
+dependencies. It lists the instance's document types and published
+content and renders any item's fields; point it at the hosted demo and
+it shows live demo content:
 
 ```sh
-cd examples/blog-astro
-npm install
-cp .env.example .env   # then set the three variables — the demo values are in the file's comments
-npm run dev
+cd examples/hello-website
+cp .env.example .env   # then uncomment the hosted-demo block in .env
+node server.js         # open http://localhost:4600
 ```
+
+Its README also walks through creating a document type and publishing a
+"Hello world" page against your own instance.
 
 ## Run your own Velora
 
