@@ -6,7 +6,21 @@ running Velora instance's public headless API, server-side, on every
 request. Publish a new post in the admin and it shows up here with no
 rebuild.
 
-## Setup
+## Try it in one minute (hosted demo)
+
+No Velora server needed — point the blog at the hosted demo:
+
+```sh
+npm install
+cp .env.example .env
+```
+
+Then uncomment the "hosted demo" block at the bottom of `.env` (demo
+URL + a public, read-only, rate-limited API key) and run `npm run dev`.
+The blog renders the demo instance's sample posts at
+`http://localhost:4321`.
+
+## Setup (your own instance)
 
 1. On your **Velora server**, turn on the headless API:
    ```
