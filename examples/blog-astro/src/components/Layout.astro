@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+import type { SeoTags } from "../lib/seo.js";
+
+interface Props {
+  title: string;
+  seo?: SeoTags;
+}
+
+const { title, seo } = Astro.props;
+const headTitle = seo?.title ?? title;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{headTitle} · Velora Blog</title>
+    {seo?.description && <meta name="description" content={seo.description} />}
+    {seo && <link rel="canonical" href={seo.canonical} />}
+    {seo && <meta property="og:title" content={seo.ogTitle} />}
+    {seo?.ogDescription && <meta property="og:description" content={seo.ogDescription} />}
+    {seo?.ogImagePath && <meta property="og:image" content={new URL(seo.ogImagePath, Astro.url.origin).href} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-title" href="/">Velora Blog</a>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Built with the Velora Blog starter — reads content live from your Velora instance.</p>
+    </footer>
+  </body>
+</html>

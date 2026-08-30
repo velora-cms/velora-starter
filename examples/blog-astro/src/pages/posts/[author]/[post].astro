@@ -1,0 +1,57 @@
+---
+import Layout from "../../../components/Layout.astro";
+import { fetchContentByPath, fetchMediaById, parseTagSlugs } from "../../../lib/api";
+import { deriveSeoTags } from "../../../lib/seo.js";
+import { renderRichText } from "../../../lib/tiptap";
+
+export const prerender = false;
+
+const { author, post } = Astro.params;
+if (!author || !post) {
+  return new Response("Not found", { status: 404 });
+}
+
+const item = await fetchContentByPath(`/${author}/${post}`);
+if (!item) {
+  return new Response("Not found", { status: 404 });
+}
+
+const authorItem = await fetchContentByPath(`/${author}`);
+const authorName = typeof authorItem?.data.name === "string" ? authorItem.data.name : author;
+
+const title = typeof item.data.title === "string" ? item.data.title : post;
+const bodyHtml = renderRichText(item.data.body);
+const publishedDate = typeof item.data.publishedDate === "string" ? item.data.publishedDate : undefined;
+const tagSlugs = parseTagSlugs(item.data.tags);
+
+// Featured image is conditional — the sample content leaves it unset, so
+// this must render nothing (not break) when featuredImage is absent.
+const featuredImageId = typeof item.data.featuredImage === "string" ? item.data.featuredImage : "";
+const featuredImage = featuredImageId ? await fetchMediaById(featuredImageId) : null;
+
+const seoTags = deriveSeoTags({ pageTitle: title, seo: item.data.seo, requestUrl: Astro.url });
+---
+
+<Layout title={title} seo={seoTags}>
+  <article class="post-detail">
+    <h1>{title}</h1>
+    <p class="post-meta">
+      By <a href={`/authors/${author}`}>{authorName}</a>
+      {publishedDate && (
+        <>
+          {" · "}
+          <time datetime={publishedDate}>{publishedDate}</time>
+        </>
+      )}
+    </p>
+    {featuredImage && <img class="featured-image" src={featuredImage.downloadUrl} alt={title} />}
+    <div class="rich-text" set:html={bodyHtml} />
+    {tagSlugs.length > 0 && (
+      <ul class="tag-chips">
+        {tagSlugs.map((slug) => (
+          <li><a class="tag-chip" href={`/tags/${slug}`}>{slug}</a></li>
+        ))}
+      </ul>
+    )}
+  </article>
+</Layout>
