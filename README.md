@@ -11,7 +11,7 @@ runnable examples, the public issue tracker, and
 ## Try Velora right now
 
 - **Hosted demo API** — a live, headless Velora instance:
-  `https://demo.velora-cms.com` (read-only demo key below).
+  `https://demo.velora-cms.com` (public demo key below — the demo blocks writes at its edge).
 - **Docs** — <https://docs.velora-cms.com>
 - **Marketplace** — <https://marketplace.velora-cms.com>
 
@@ -20,7 +20,7 @@ curl -H "Authorization: Bearer vk_4ac0a6b78b953a13b8646e6379fcbb6bee1a269af253a1
   "https://demo.velora-cms.com/api/v1/content?limit=3"
 ```
 
-That key is intentionally public: read-only demo content, rate-limited,
+That key is intentionally public: the demo blocks every write at its edge, it is rate-limited,
 rotated whenever we feel like it.
 
 ## Run the example site
