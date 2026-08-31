@@ -1,83 +1,84 @@
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |# Hello website
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |A normal website on Velora's headless API: one file, no framework, no
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |npm dependencies. `server.js` fetches published content server-side
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |(your API key never reaches the browser) and renders plain HTML — the
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |home page lists every content item grouped by document type; click one
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |to see its fields.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |## Try it in one minute (hosted demo)
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |```sh
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |cp .env.example .env   # then uncomment the "hosted demo" block in .env
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |node server.js         # open http://localhost:4600
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |```
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |## Point it at your own instance
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |1. Run your Velora server with `VELORA_HEADLESS=true`.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |2. In the admin, go to **Settings → API Keys** and create a key.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |3. Put your server's origin and the key in `.env`, then `node server.js`.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |## Make it say hello world
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |In the Velora admin:
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |1. **Document types** → create a type — e.g. `Page` with a text field
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |   `title` and a rich-text field `body`.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |2. **Content** → create a `Page`, type "Hello world", **publish** it.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |3. Refresh the site — your page is listed under **Page**; click it to
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |   see the fields. No rebuild, no cache to clear.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |From here, view source on `server.js` — the whole site is ~120 lines —
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |and reshape the HTML however you like.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |## How the code works (`server.js`, top to bottom)
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |**1. Load `.env`** — ten lines that read `KEY=value` pairs into
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |`process.env` (real shell exports win). No dotenv dependency needed.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |**2. Configuration** — three values:
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. || Variable | Meaning |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. ||---|---|
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. || `VELORA_API_URL` | Your Velora server's origin. All requests go to `<origin>/api/v1/…`. |
-| `VELORA_API_KEY` | An API key from **Settings → API Keys**. Sent as `Authorization: Bearer <key>`. A key grants full content read **and write** access on your own instance — keep it secret. The hosted demo is the exception: its edge blocks writes, so its public key can only read. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. || `PORT` | Where this site listens (default `4600`). |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |**3. `velora(apiPath)`** — the only piece of "API client": `fetch` with
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |the bearer header, throw on non-2xx, return JSON. Everything else is HTML.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |**4. `home()`** — two requests in parallel, then a grouped list:
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. || Request | Returns |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. ||---|---|
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. || `GET /api/v1/document-types?limit=100` | `{ items: [{ id, name }], nextCursor }` — every document type the instance has. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. || `GET /api/v1/content?limit=100` | `{ items: [{ id, parentId, path, depth, sortOrder, documentTypeId, locale, publishedAt }], nextCursor }` — every **published** content node, tree order, no field data. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |The page maps each item's `documentTypeId` to its type name and groups by
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |it. `nextCursor` is how you page through bigger sites: pass it back as
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |`?cursor=…` until it comes back `null` (this example stops at 100).
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |**5. `item(id)`** — `GET /api/v1/content/<id>` returns the full item:
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |`{ id, documentTypeId, locale, publishedAt, version, data }`. `data` is
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |an object keyed by field id (`title`, `body`, …) whose values are
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |whatever the field's data type stores — strings, numbers, or nested
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |objects/arrays for rich fields. The page renders strings as text and
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |anything structured as pretty-printed JSON so you can see the real shape
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |before you design markup for it.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |Two more endpoints you'll want as the site grows:
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |`GET /api/v1/content/by-path?path=/about` (resolve a URL to an item) and
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |`GET /api/v1/content/<id>/children` (one level of the tree, paginated).
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |**6. The HTTP server** — one `createServer` with two routes (`/` and
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |`/item?id=…`). Anything thrown above becomes a readable 500 page instead
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |of a crash. `esc()` HTML-escapes every value that came from the API —
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |keep doing that in your own markup.
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |## Why server-side
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |The API key is a secret for *your* instance. Fetching on the server keeps
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |it out of the browser bundle; the hosted demo's key is the one deliberate
-A key grants full content read **and write** access on your own instance — keep it secret; the hosted demo is the exception because its edge blocks writes. |exception (public and rate-limited — the demo blocks every write at its edge, so the key can only read).
+# Hello website
+
+A normal website on Velora's headless API: one file, no framework, no
+npm dependencies. `server.js` fetches published content server-side
+(your API key never reaches the browser) and renders plain HTML — the
+home page lists every content item grouped by document type; click one
+to see its fields.
+
+## Try it in one minute (hosted demo)
+
+```sh
+cp .env.example .env   # then uncomment the "hosted demo" block in .env
+node server.js         # open http://localhost:4600
+```
+
+## Point it at your own instance
+
+1. Run your Velora server with `VELORA_HEADLESS=true`.
+2. In the admin, go to **Settings → API Keys** and create a key.
+3. Put your server's origin and the key in `.env`, then `node server.js`.
+
+## Make it say hello world
+
+In the Velora admin:
+
+1. **Document types** → create a type — e.g. `Page` with a text field
+   `title` and a rich-text field `body`.
+2. **Content** → create a `Page`, type "Hello world", **publish** it.
+3. Refresh the site — your page is listed under **Page**; click it to
+   see the fields. No rebuild, no cache to clear.
+
+From here, view source on `server.js` — the whole site is ~120 lines —
+and reshape the HTML however you like.
+
+## How the code works (`server.js`, top to bottom)
+
+**1. Load `.env`** — ten lines that read `KEY=value` pairs into
+`process.env` (real shell exports win). No dotenv dependency needed.
+
+**2. Configuration** — three values:
+
+| Variable | Meaning |
+|---|---|
+| `VELORA_API_URL` | Your Velora server's origin. All requests go to `<origin>/api/v1/…`. |
+| `VELORA_API_KEY` | An API key from **Settings → API Keys**. Sent as `Authorization: Bearer <key>`. Keys are read-scoped by default, which is all this example needs; a key that can also write is an explicit choice an admin makes on the create form. Keep it secret either way. |
+| `PORT` | Where this site listens (default `4600`). |
+
+**3. `velora(apiPath)`** — the only piece of "API client": `fetch` with
+the bearer header, throw on non-2xx, return JSON. Everything else is HTML.
+
+**4. `home()`** — two requests in parallel, then a grouped list:
+
+| Request | Returns |
+|---|---|
+| `GET /api/v1/document-types?limit=100` | `{ items: [{ id, name }], nextCursor }` — every document type the instance has. |
+| `GET /api/v1/content?limit=100` | `{ items: [{ id, parentId, path, depth, sortOrder, documentTypeId, locale, publishedAt }], nextCursor }` — every **published** content node, tree order, no field data. |
+
+The page maps each item's `documentTypeId` to its type name and groups by
+it. `nextCursor` is how you page through bigger sites: pass it back as
+`?cursor=…` until it comes back `null` (this example stops at 100).
+
+**5. `item(id)`** — `GET /api/v1/content/<id>` returns the full item:
+`{ id, documentTypeId, locale, publishedAt, version, data }`. `data` is
+an object keyed by field id (`title`, `body`, …) whose values are
+whatever the field's data type stores — strings, numbers, or nested
+objects/arrays for rich fields. The page renders strings as text and
+anything structured as pretty-printed JSON so you can see the real shape
+before you design markup for it.
+
+Two more endpoints you'll want as the site grows:
+`GET /api/v1/content/by-path?path=/about` (resolve a URL to an item) and
+`GET /api/v1/content/<id>/children` (one level of the tree, paginated).
+
+**6. The HTTP server** — one `createServer` with two routes (`/` and
+`/item?id=…`). Anything thrown above becomes a readable 500 page instead
+of a crash. `esc()` HTML-escapes every value that came from the API —
+keep doing that in your own markup.
+
+## Why server-side
+
+The API key is a secret for *your* instance. Fetching on the server keeps
+it out of the browser bundle; the hosted demo's key is the one deliberate
+exception (public and rate-limited, and it only reads — the demo blocks
+every write at its edge as well).
