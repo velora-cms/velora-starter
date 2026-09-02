@@ -42,10 +42,22 @@ Its README also walks through creating a document type and publishing a
 
 ## Run your own Velora
 
-A one-command install — **`npm create velora`** — is coming: scaffold a
-site, `npm run dev`, and finish the installation in your browser
-(database choice included). Until then, the hosted demo above is the
-fastest way to explore, and plugin developers can start today with the
+The one-command install is here:
+
+```sh
+npm create velora@latest my-site
+cd my-site
+npm run dev
+```
+
+Open http://localhost:3000/velora and finish setup in your browser
+(database choice included) — or answer everything in the terminal with
+Custom mode. Your project is plain files you own: `server.js` to extend,
+`public/` for your assets, uploads in `media/`.
+
+This repository is the official home for **questions and bug reports
+about using Velora** — open an issue or start a discussion. Plugin
+developers can start today with the
 [Velora devkit](https://github.com/velora-cms/velora-devkit).
 
 ## Community
